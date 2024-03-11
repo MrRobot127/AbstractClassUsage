@@ -1,6 +1,4 @@
-﻿
-
-namespace AbstractClassUsage
+﻿namespace AbstractClassUsage
 {
     public abstract class Account
     {
@@ -10,6 +8,15 @@ namespace AbstractClassUsage
         {
             Name = name;
             Balance = balance;
+        }
+
+        public void Display()
+        {
+            System.Console.WriteLine($"Account Name: {this.Name}");
+            System.Console.WriteLine($"Type: {this.GetType().Name}");
+            System.Console.WriteLine($"Balance: {Balance}");
+            System.Console.WriteLine($"InterestRate: {this.GetRateOfInterest()}");
+            System.Console.WriteLine();
         }
 
         public abstract double GetRateOfInterest();
@@ -37,7 +44,19 @@ namespace AbstractClassUsage
 
         public override double GetRateOfInterest()
         {
-            return 3;
+            return 3.5;
+        }
+    }
+
+    public class Fixed : Account
+    {
+        public Fixed(string name, double balance) : base(name, balance)
+        {
+        }
+
+        public override double GetRateOfInterest()
+        {
+            return 4.5;
         }
     }
 
@@ -45,9 +64,21 @@ namespace AbstractClassUsage
     {
         public static void Main(string[] args)
         {
-            Account s = new Saving("Girish", 10000);
+            Account a = new Saving("Girish", 10000);
+            Account b = new Saving("Amit", 2000);
 
-            Account.CreditInterest(s);
+            System.Console.WriteLine("Balance before Interest Credited to Account...");
+            a.Display();
+
+            b.Display();
+
+            System.Console.WriteLine("Credited Interest to Account...");
+            Account.CreditInterest(a);
+            Account.CreditInterest(b);
+
+
+            a.Display();
+            b.Display();
         }
     }
 }
