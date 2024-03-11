@@ -14,15 +14,18 @@ namespace AbstractClassUsage
 
         public abstract double GetRateOfInterest();
 
+        //to deposit amount to an account
         public void Deposit(double amount)
         {
             Balance += amount;
         }
+
+        //to credit interest to all the account
         public static void CreditInterest(Account ac)
         {
             double rateOfInterest = ac.GetRateOfInterest();
-            double finalAmount = (ac.Balance) * (rateOfInterest / 4) / 100;
-            ac.Deposit(finalAmount);
+            double amountToCredit = (ac.Balance) * (rateOfInterest / 4) / 100;
+            ac.Deposit(amountToCredit);
         }
     }
 
@@ -30,7 +33,6 @@ namespace AbstractClassUsage
     {
         public Saving(string name, double balance) : base(name, balance)
         {
-
         }
 
         public override double GetRateOfInterest()
@@ -43,7 +45,7 @@ namespace AbstractClassUsage
     {
         public static void Main(string[] args)
         {
-            Saving s = new Saving("Girish", 10000);
+            Account s = new Saving("Girish", 10000);
 
             Account.CreditInterest(s);
         }
